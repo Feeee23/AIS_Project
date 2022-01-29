@@ -4,7 +4,7 @@ import random
 from gazebo_msgs.msg import ModelStates
 from wifi_scan.msg import Fingerprint, AddressRSSI
 
-Distance=[2.8, 3.8] #Distance between w1, w2 in meters
+Distance=[10, 10] #Distance between w1, w2 in meters
 BSSID=['3C371254A3**','1CC63C149164','32CDA79A60F7'] #The name of our three Wifi points (FRITZBOX 7520 NN Ghz, Easybox-149130, Direct-DhC460-Series)
 
 

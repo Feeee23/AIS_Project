@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import imp
 from turtle import distance
 import rospy
 from std_msgs.msg import String
@@ -7,7 +6,7 @@ from wifi_scan.msg import Fingerprint
 #find the  with $nmcli dev wifi
 BSSID=['3C371254A3**','1CC63C149164','32CDA79A60F7'] #The name of our three Wifi points (FRITZBOX 7520 NN Ghz, Easybox-149130, Direct-DhC460-Series)
 #BSSID=['DEB0DA9B4D51','929BA9EF4B7D','3C371254A3**'] #The name of our three Wifi points (old Laptop, Smartphone, Router)
-Distance=[2.8, 3.8] #Distance between w1, w2 in meters
+Distance=[10, 10] #Distance between w1, w2 in meters
 
 def talker(pos):
     pub = rospy.Publisher('/wifi_pos', String, queue_size=10)

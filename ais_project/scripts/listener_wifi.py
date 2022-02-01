@@ -40,7 +40,7 @@ def callback(data):
 def listener():
     rospy.init_node('listener_wifi', anonymous=True)
 
-    rospy.Subscriber('/wifi_fp', Fingerprint, callback)
+    rospy.Subscriber('/wifi_fp', Fingerprint, callback, queue_size=1)
 
     rospy.spin()  # spin() simply keeps python from exiting until this node is stopped
 

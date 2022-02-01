@@ -42,7 +42,7 @@ def listener():
     # run simultaneously.
     rospy.init_node('sensor_converter', anonymous=True)
 
-    rospy.Subscriber('/imu', Imu, callback)
+    rospy.Subscriber('/imu', Imu, callback, queue_size=1)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()

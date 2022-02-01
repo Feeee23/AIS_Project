@@ -16,7 +16,7 @@ def talker(u):
 def callback(data):
     ratio=[0,0]
     S=[100, 0, 0]
-    uncertainty=[random.uniform(-.1,.1),random.uniform(-.1,.1)] #adds an uncertanty to the sensor 
+    uncertainty=[random.uniform(-1,1),random.uniform(-1,1)] #adds an uncertanty to the sensor 
     rospy.loginfo('uncertainty'+str(uncertainty))
     ratio[0]=(Distance[0]/(data.pose[1].position.x+uncertainty[0]))-1
     ratio[1]=(Distance[1]/(data.pose[1].position.y+uncertainty[1]))-1
@@ -45,7 +45,7 @@ def listener():
     # run simultaneously.
     rospy.init_node('sensor_converter', anonymous=True)
 
-    rospy.Subscriber('/gazebo/model_states', ModelStates, callback)
+    rospy.Subscriber('/gazebo/model_states', ModelStates, callback, queue_size=1)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()

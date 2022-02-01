@@ -20,8 +20,8 @@ KGain=np.array([[0,0,0,0], #Kalman Gain
                 [0,0,0,0],
                 [0,0,0,0],
                 [0,0,0,0]])
-R=np.array([[25,0,0,0], #Observation Error
-            [0,25,0,0],
+R=np.array([[4,0,0,0], #Observation Error
+            [0,4,0,0],
             [0,0,0,0],
             [0,0,0,0]])
 
@@ -61,7 +61,7 @@ def NewPrediction(u):
                 [0, t]])
     global PPos, PC
     PPos= np.matmul(A,LPos)+np.matmul(B,u)          #New Prediction A*x+B*U
-    PC= np.matmul(np.matmul(A, PC), A.transpose())+np.array([[10,0,0,0],[0,10,0,0],[0,0,0,0],[0,0,0,0]])  #new Predicted Process Covariance matrix
+    PC= np.matmul(np.matmul(A, PC), A.transpose())+np.array([[1,0,0,0],[0,1,0,0],[0,0,0,0],[0,0,0,0]])  #new Predicted Process Covariance matrix
     rospy.loginfo('\nPredicted Pos=\n'+str(PPos)+'\nPC= \n'+str(PC)+'Time'+str(t))
     NewCorrection()
 
@@ -86,9 +86,9 @@ def ExactData(data):
 def listener():
     rospy.init_node('Kalmanfilter', anonymous=True)
 
-    rospy.Subscriber('/wifi_pos', String, WifiPos)
-    rospy.Subscriber('/gazebo/model_states', ModelStates, ExactData) #Exact Position, only for Simulation
-    rospy.Subscriber('/sensor_data', String, SensorData)
+    rospy.Subscriber('/wifi_pos', String, WifiPos,queue_size=1)
+    rospy.Subscriber('/gazebo/model_states', ModelStates, ExactData, queue_size=1) #Exact Position, only for Simulation
+    rospy.Subscriber('/sensor_data', String, SensorData, queue_size=1)
     rospy.spin()  # spin() simply keeps python from exiting until this node is stopped
 
 if __name__ == '__main__':
